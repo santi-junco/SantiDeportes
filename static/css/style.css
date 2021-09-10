@@ -1,0 +1,10 @@
+.bg-dark-x{
+    background-color: #1e2126;
+}
+body{
+    background-color: #f0f0f0;
+}
+.navbar.sticky{
+    padding: 15px 0;
+    background: crimson;
+}

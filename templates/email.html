@@ -1,0 +1,86 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/email.css">
+    <title>Document</title>
+</head>
+<body>
+    <img src="../static/img/SANTI.png" alt="" width="150" style="width: 150px; background-color: black"> 
+    {% if desde == "recup" %}
+        <h3>Recuperación de contraseña</h3>
+        <p>Ingrese en el siguiente link para recuperar su contraseña</p>
+        <a href="{{ message | safe }}">{{ message }}</a>
+        <br>
+        <p>Si usted no solicito recuperar su contraseña, es posible que alguien más esté tratando de ingresar con su cuenta</p>
+    {% else %}
+        <div class="verificacion">
+            <h3>Verificacion de cuenta</h3>
+            <p>Para verificar que {{ email }} te pertenece, ingresa en el siguiente link.</p>
+            <a href="{{ message | safe }}">{{ message }}</a>
+            <br>
+            <p>Recuerda que no podrás iniciar sesión sin verificar tu email.</p>
+        </div>
+    {% endif %}
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Making Accessible Emails</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <style type="text/css">
+        /* CLIENT-SPECIFIC STYLES */
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; }
+
+        /* RESET STYLES */
+        img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+        table { border-collapse: collapse !important; }
+        body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+    </style>
+  </head>
+  <body style="background-color: #f0f0f0; margin: 0 !important; padding: 60px 0 60px 0 !important;">
+    <table border="0" cellspacing="0" cellpadding="0" role="presentation" width="100%">
+        {% if desde == "recup" %}
+            <tr>
+                <td bgcolor="#f0f0f0" style="font-size: 0;">&​nbsp;</td>
+                <td bgcolor="white" width="600" style="border-radius: 4px; color: grey; font-family: sans-serif; font-size: 18px; line-height: 28px; padding: 40px 40px;">
+                    <article style="display: inline-block; justify-content: center; align-items: center; text-align: center;">
+                        <h1 style="color: black; font-size: 32px; font-weight: bold; line-height: 36px; margin: 0 0 30px 0;">Recuperación de contraseña.</h1>
+                        <img alt="Santi Deportes" src="https://i.ibb.co/KDCYFTN/SANTI2.png" width="350" style="background-color:#1e2126; color: white; font-family: sans-serif; font-size: 18px; font-weight: bold; height: auto; max-width: 100%;">
+                        <p style="margin: 30px 0 30px 0;">Ingrese en el siguiente link para recuperar su contraseña.</p>
+                        <p style="margin: 30px 0 30px 0; text-align: center;">
+                            <a href="{{ message | safe }}" target="_blank" style="font-size: 18px; font-family: sans-serif; color: #ffffff; text-decoration: none; border-radius: 8px; -webkit-border-radius: 8px; background-color: dodgerblue; border-top: 20px solid dodgerblue; border-bottom: 18px solid dodgerblue; border-right: 40px solid dodgerblue; border-left: 40px solid dodgerblue; display: inline-block;">Ingresar</a>
+                        </p>
+                        <p style="margin: 0 0 30px 0;">Si usted no solicito recuperar su contraseña, es posible que alguien más esté tratando de ingresar con su cuenta.</p>
+                    </article>
+                </td>
+                <td bgcolor="#f0f0f0" style="font-size: 0;">&​nbsp;</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td bgcolor="#f0f0f0" style="font-size: 0;">&​nbsp;</td>
+                <td bgcolor="white" width="600" style="border-radius: 4px; color: grey; font-family: sans-serif; font-size: 18px; line-height: 28px; padding: 40px 40px;">
+                    <article style="display: inline-block; justify-content: center; align-items: center; text-align: center;">
+                        <h1 style="color: black; font-size: 32px; font-weight: bold; line-height: 36px; margin: 0 0 30px 0;">Verificacion de cuenta.</h1>
+                        <img alt="Santi Deportes" src="https://i.ibb.co/KDCYFTN/SANTI2.png" width="350" style="background-color:#1e2126; color: white; font-family: sans-serif; font-size: 18px; font-weight: bold; height: auto; max-width: 100%;">
+                        <p style="margin: 30px 0 30px 0;">Para verificar que {{ email }} te pertenece, ingresa en el siguiente link.</p>
+                        <p style="margin: 30px 0 30px 0; text-align: center;">
+                            <a href="{{ message | safe }}" target="_blank" style="font-size: 18px; font-family: sans-serif; color: #ffffff; text-decoration: none; border-radius: 8px; -webkit-border-radius: 8px; background-color: dodgerblue; border-top: 20px solid dodgerblue; border-bottom: 18px solid dodgerblue; border-right: 40px solid dodgerblue; border-left: 40px solid dodgerblue; display: inline-block;">Ingresar</a>
+                        </p>
+                        <p style="margin: 0 0 30px 0;">Recuerda que no podrás iniciar sesión sin verificar tu email.</p>
+                    </article>
+                </td>
+                <td bgcolor="#f0f0f0" style="font-size: 0;">&​nbsp;</td>
+            </tr>
+        {% endif %}
+    </table>
+  </body>
+</html>

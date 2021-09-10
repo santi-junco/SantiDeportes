@@ -1,0 +1,54 @@
+:root{
+    --dark: #16191c;
+    --dark-x: #1e2126;
+}
+body{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 300;
+    color: #fff;
+}
+.bg-dark{
+    background-color: var(--dark) !important;
+}
+.bg-dark-x{
+    background-color: var(--dark-x);
+    color: #fff;
+}
+.navbar-nav{
+    justify-content: right;
+    align-items: right;
+}
+.form-control, .btn{
+    min-height: 3.125rem;
+    line-height: initial;
+}
+.img-1{
+    background-image: url('../img/ben-weber-r-krWscXjvQ-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.img-2{
+    background-image: url('../img/gabin-vallet-vJf3t75gYtI-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.img-3{
+    background-image: url('../img/ivana-cajina-rdZg6xmnpVM-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.img-4{
+    background-image: url('../img/kate-trifo-jf_YIwWKg8Q-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.img-5{
+    background-image: url('../img/malcolm-lightbody-jW2CpfyQo7o-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.img-6{
+    background-image: url('../img/nicolas-hoizey--4trKf0Kbow-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+}

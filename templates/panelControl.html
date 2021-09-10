@@ -1,0 +1,33 @@
+{% extends "structura.html" %}
+<head>
+    <title>{% block titlte %} Panel de control{% endblock %}</title>
+</head>
+
+{% block navbar %}
+    <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/">Pagina principal</a></li>
+        <li class="nav-item"><a class="nav-link" href="/miSeleccion">Mi seleccion</a></li>
+        <li class="nav-item"><a class="nav-link" href="/panelControl">Panel de control</a></li>
+        <li class="nav-item"><a class="nav-link" href="/logout">Cerrar sesion</a></li>
+        
+    </ul>
+{% endblock %}
+
+{% block main %}
+ 
+    <div class="container-lg" style="margin-top: 12rem;margin-bottom: 12rem; border-radius: 5px; border: solid 1px;">
+        <div class="row" style="margin: 1rem; border: solid 1px; border-radius: 5px; background-color: #0d6efd; color: #fff">
+            <div class="col d-flex justify-content-center">Nombre</div>
+            <div class="col d-flex justify-content-center">Email</div>
+            <div class="col d-flex justify-content-center">Es admin</div>
+        </div>
+        {% for i in lista %}
+            <div class="row" style="margin: 1rem;">
+                <div class="col d-flex justify-content-center">{{ i[0] }}</div>
+                <div class="col d-flex justify-content-center">{{ i[1] }}</div>
+                <div class="col d-flex justify-content-center">{% if i[2] == 1 %} Si {% else %} No {% endif %}</div>
+            </div>
+        {% endfor %}
+    </div>  
+
+{% endblock %}

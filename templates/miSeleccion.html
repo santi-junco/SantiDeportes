@@ -1,0 +1,75 @@
+{% extends "structura.html" %}
+<head>
+    <title>{% block titlte %} Mi seleccion {% endblock %}</title>
+</head>
+
+{% block navbar %}
+    <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/">Pagina principal</a></li>
+        <li class="nav-item"><a class="nav-link" href="/miSeleccion">Mi seleccion</a></li>
+        {% if admin == 1 %}
+            <li class="nav-item"><a class="nav-link" href="/panelControl">Panel de control</a></li>
+        {% endif %}
+        <li class="nav-item"><a class="nav-link" href="/logout">Cerrar sesion</a></li>
+    </ul>
+{% endblock %}
+
+{% block main %}
+    <br>
+    {% if cantidad != 0 %}
+        <h3 class="d-flex justify-content-center align-items-center" style="margin-bottom: 15px">Favoritos</h3>
+    {% endif %}
+    <div class="container-lg">
+        <div class="row row-cols-1 row-cols-md-3 g-4 d-flex justify-content-center align-items-center">
+            {% if cantidad == 0 %}
+            <div class="container d-flex justify-content-center text-center align-items-center" 
+                style="margin-top: 14rem; 
+                    margin-bottom: 14rem;
+                    width: 100%;
+                    border: 1px solid;
+                    border-radius: 5px">
+                <h1>Aun no tiene productos favoritos</h1>
+            </div>
+            {% else %}
+                {% for i in listProd %}
+                    <div class="col">
+                        <form action="/miSeleccion" method='POST'>
+                            <div class="card h-100" >
+                                <div id="carouselExampleControls{{ i[0] }}" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                      <div class="carousel-item active">
+                                        <img src="../static/img/{{ i[5] }}" class="d-block w-100" alt="...">
+                                      </div>
+                                      <div class="carousel-item">
+                                        <img src="../static/img/{{ i[6] }}" class="d-block w-100" alt="...">
+                                      </div>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls{{ i[0] }}" data-bs-slide="prev">
+                                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                      <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls{{ i[0] }}" data-bs-slide="next">
+                                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                      <span class="visually-hidden" >Next</span>
+                                    </button>
+                                </div>
+                                <div class="card-body" style="font-family: 'Ubuntu', sons-serif">
+                                    <h5 class="card-title" style="font-weight: 800;">
+                                        {{ i[1] }}
+                                    </h5>
+                                    <span class="card-text">{{ i[2] }}</span><br>
+                                    <span class="card-text" style="font-weight: 800; font-size: 1.7rem;">${{ i[3] }}</span><br>
+                                    <span class="card-text">Talle disponibles: {{ i[4] }}</span><br>
+                                    <button type="submit" class="btn btn-secondary w-100">Quitar</button>
+                                </div>
+                            </div>
+                            <input readonly type="hidden" name="id" value="{{ i[0] }}">
+                        </form>
+                    </div>
+                    <br>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <br>
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends "structura.html" %}
+<head>
+    <title>{% block titlte %} Inicio {% endblock %}</title>
+</head>
+
+{% block navbar %}
+    <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/">Pagina principal</a></li>
+        {% if sesion %}
+            <li class="nav-item"><a class="nav-link" href="/miSeleccion">Mi seleccion</a></li>
+            {% if admin == 1 %}
+                <li class="nav-item"><a class="nav-link" href="/panelControl">Panel de control</a></li>
+            {% endif %}
+            <li class="nav-item"><a class="nav-link" href="/logout">Cerrar sesion</a></li>
+        {% else %}
+            <li class="nav-item"><a class="nav-link" href="/registrarse">Registrarse</a></li>
+            <li class="nav-item"><a class="nav-link" href="/iniciarSesion">Iniciar sesion</a></li>
+        {% endif %}
+    </ul>
+{% endblock %}
+
+{% block main %}
+    <div style="height:50%">
+        {% if message == 'calzados' %}
+        <div class="row g-0">
+            <img src="../static/img/calzadovaner.jpg" alt="">
+        </div>
+        {% else %}
+            {% if message == 'pantalones' or message == 'remeras' %}
+            <div class="row g-0">
+                <img src="../static/img/indumentariavaner.jpg" alt="">
+            </div>
+            {% else %}
+                <div class="row g-0">
+                    <div class="col">
+                        <div id="carouselExampleControls" class="carousel slide " data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="../static/img/vaner.jpg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item ">
+                                <img src="../static/img/vane2.jpg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item ">
+                                <img src="../static/img/vaner3.jpg" class="d-block w-100" alt="...">
+                            </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+    <br>
+    <div class="container d-flex flex-column align-items-center">
+        <ul class="list-group list-group-horizontal-lg">
+            <li class="list-group-item d-flex justify-content-center align-items-center active" aria-current="true" >Categorias</li>
+            <a class="list-group-item list-group-item-action d-flex justify-content-center align-items-center" href="/cat/calzados">Calzados</a>
+            <a class="list-group-item list-group-item-action d-flex justify-content-center align-items-center" href="/cat/remeras">Remeras</a>
+            <a class="list-group-item list-group-item-action d-flex justify-content-center align-items-center" href="/cat/pantalones">Pantalones</a>
+        </ul>
+    </div>
+    <br>
+    <div class="container-lg">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for i in listProd %}
+                <div class="col">
+                    <form method='POST'>
+                        <div class="card h-100" >
+                            <div id="carouselExampleControls{{ i[0] }}" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                  <div class="carousel-item active">
+                                    <img src="../static/img/{{ i[5] }}" class="d-block w-100" alt="...">
+                                  </div>
+                                  <div class="carousel-item">
+                                    <img src="../static/img/{{ i[6] }}" class="d-block w-100" alt="...">
+                                  </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls{{ i[0] }}" data-bs-slide="prev">
+                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                  <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls{{ i[0] }}" data-bs-slide="next">
+                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                  <span class="visually-hidden" >Next</span>
+                                </button>
+                            </div>
+                            <div class="card-body" style="font-family: 'Ubuntu', sons-serif">
+                                <h5 class="card-title" style="font-weight: 800;">
+                                    {{ i[1] }}
+                                </h5>
+                                <span class="card-text">{{ i[2] }}</span><br>
+                                <span class="card-text" style="font-weight: 800; font-size: 1.7rem;">${{ i[3] }}</span><br>
+                                <span class="card-text">Talle disponibles: {{ i[4] }}</span><br>
+                                {% if sesion %}
+                                    <button type="submit" class="btn btn-primary w-100">Favorito</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <input type="hidden" name="id" value="{{ i[0] }}">
+                        <input type="hidden" name="titulo" value="{{ i[1] }}">
+                        <input type="hidden" name="descripcion" value="{{ i[2] }}">
+                        <input type="hidden" name="precio" value="{{ i[3] }}">
+                        <input type="hidden" name="talle" value="{{ i[4] }}">
+                        <input type="hidden" name="foto" value="{{ i[5] }}">
+                        <input type="hidden" name="foto2" value="{{ i[6] }}">
+                    </form>
+                </div>
+                <br>
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+
+{% endblock %}
+
+</html>

@@ -1,0 +1,131 @@
+{% extends "structura.html" %}
+
+<head>
+    {% block head %} 
+        <link rel="stylesheet" href="../static/css/login.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% endblock %}
+    <title>{% block titlte %} Recuperar contraseña {% endblock %}</title>
+</head>
+
+{% block navbar %}
+    <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/">Pagina principal</a></li>
+        {% if sesion %}
+            <li class="nav-item"><a class="nav-link" href="/miSeleccion">Mi seleccion</a></li>
+            {% if admin == 1 %}
+                <li class="nav-item"><a class="nav-link" href="/panelControl">Panel de control</a></li>
+            {% endif %}
+            <li class="nav-item"><a class="nav-link" href="/logout">Cerrar sesion</a></li>
+        {% else %}
+            <li class="nav-item"><a class="nav-link" href="/registrarse">Registrarse</a></li>
+            <li class="nav-item"><a class="nav-link" href="/iniciarSesion">Iniciar sesion</a></li>
+        {% endif %}
+    </ul>
+{% endblock %}
+
+{% block main %}
+    <section>
+        <div class="row g-0">
+            <div class="col-lg-7">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                        <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                        <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item img-1 min-vh-100 active">
+                        </div>
+                        <div class="carousel-item img-2 min-vh-100">
+                        </div>
+                        <div class="carousel-item img-3 min-vh-100">
+                        </div>
+                        <div class="carousel-item img-4 min-vh-100">
+                        </div>
+                        <div class="carousel-item img-5 min-vh-100">
+                        </div>
+                        <div class="carousel-item img-6 min-vh-100">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-5 d-flex flex-column align-items-end min-vh-100 bg-dark">
+                <div class="px-lg-5 py-lg-4 p-4 w-100 m-auto align-self-center">
+                    {% if desde == 'recup' %}
+                        <h1 class="mb-4">Recuperacion de contraseña</h1>
+                        <form class="mb-5" action="/recuperarContraseña" method="post">
+                            <div class="mb-4">
+                                <label for="exampleInputEmail1" class="form-label">Email</label>
+                                <input type="email" class="form-control bg-dark-x border-0" placeholder="Ingresa tu email" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                            </div>
+                            <br>
+                            {% if message != "" %}
+                                {% if paso == 1 %}
+                                    <div class="alert alert-success alert-dismissible" role="alert" id="liveAlert">
+                                        <span><i class="fa fa-check" aria-hidden="true"></i> {{ message }}</span>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% else %}
+                                    <div class="alert alert-danger alert-dismissible" role="alert" id="liveAlert">
+                                        <span><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{ message }}</span>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                            <input type="submit" value="Recuperar contraseña" class="btn btn-primary w-100"></input>
+                        </form>
+                    {% else %}
+                        <h1 class="mb-4">{{usuario}} cambia tu contraseña por favor</h1>
+                        <form action="/cambioContraseña/{{ email }}" method="post">
+                            <div class="mb-2">
+                                <label for="exampleInputPassword1" >Contraseña</label>
+                                <p style="margin: 1px; font-size: 13px;">. Minimo 8 caracteres, una mayuscula, una minuscula y un numero</p>
+                                <div class="col d-flex">
+                                    <input type="password" class="form-control bg-dark-x border-0 " placeholder="Ingresa tu contraseña" name="password" id="exampleInputPassword1" required>
+                                    <button class="btn bg-dark-x" type="button" onclick="mostrarContrasena('exampleInputPassword1')"><i class="fa fa-eye bg-dark-x" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <label for="exampleInputPassword1" class="form-label">Confirmar contraseña</label>
+                                <div class="col d-flex">
+                                    <input type="password" class="form-control bg-dark-x border-0" placeholder="Contraseña" name="password2" id="exampleInputPassword2" required>
+                                    <button class="btn bg-dark-x" type="button" onclick="mostrarContrasena('exampleInputPassword2')"><i class="fa fa-eye bg-dark-x" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                            <br>
+                            {% if message != "" %}
+                                {% if paso == 1 %}
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert" id="liveAlert">
+                                        <span><i class="fa fa-check" aria-hidden="true"></i> {{ message }}</span>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% else %}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="liveAlert">
+                                        <span><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{ message }}</span>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                            <input type="submit" value="Cambiar contraseña" class="btn btn-primary w-100"></input>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="../static/scripts/scripts.js"></script>
+
+{% endblock %}
