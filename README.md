@@ -1,3 +1,3 @@
 # SantiDeportes
 
-link de la pagina: https://safe-shore-79903.herokuapp.com/
+link de la pagina: https://santideportes.up.railway.app/

@@ -110,7 +110,7 @@ def registrarse():
                 if password == conf_pwd:
                     message = model.signup(username, password, email)
                     msg = Message('Hola {username}, ¡te damos la bienvenida a Santi Deportes!'.format(username = username), sender = app.config['MAIL_USERNAME'], recipients = [email])
-                    msg.html = render_template('email.html', message = 'https://safe-shore-79903.herokuapp.com/verificado/{email}'.format(email = email), email = email)
+                    msg.html = render_template('email.html', message = 'https://santideportes.up.railway.app/verificado/{email}'.format(email = email), email = email)
                     # msg.html = render_template('email.html', message = 'http://127.0.0.1:5000/verificado/{email}'.format(email = email), email = email)
                     mail.send(msg)
                     paso = 1
@@ -158,7 +158,7 @@ def recuperarContrasseña():
             return render_template('contraseña.html', message = message, desde = 'recup')
         else:
             msg = Message('Recuperación de contraseña', sender = app.config['MAIL_USERNAME'], recipients = [email])
-            message = 'https://safe-shore-79903.herokuapp.com/cambioContraseña/{email}'.format(email = email)
+            message = 'https://santideportes.up.railway.app/cambioContraseña/{email}'.format(email = email)
             # message = 'http://127.0.0.1:5000/cambioContraseña/{email}'.format(email = email)
             msg.html = render_template('email.html', message = message, desde = 'recup')
             mail.send(msg)
